@@ -1,0 +1,19 @@
+Client => React, tailwind
+Server => node, express, nodemon, mangodb, mongoose, cors, body-parser
+
+
+exercise Api => https://api-ninjas.com/api/exercises
+
+exercise = {
+    "name": "..."
+    "type": "strength",
+    "muscle": "biceps",
+    "equipment": "dumbbell",
+    "difficulty": "beginner",
+    "instructions": "..."
+
+}
+
+workouts = {
+    exercises:[exercise]
+}
