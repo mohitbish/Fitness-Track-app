@@ -3,10 +3,10 @@ const {
     
   } = require("./Controllers/Usercontroller");
   
-  const router = require("express").Router();
+const router = require("express").Router();
   
-  router.post("/register", register);
+router.post("/register", register);
 
   
-  module.exports = router;
+module.exports = router;
   

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import axios from "axios";
 import {registerroute} from '../Routes/dbroute'
 
 
 const Welcome = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, seteamil] = useState("");
   const [password, setpassword] = useState("");
@@ -40,6 +41,16 @@ const Welcome = () => {
         email: email,
         password: password
       });
+      if (data.status === false) {
+        alert(data.msg);
+      }
+      if (data.status === true) {
+        localStorage.setItem(
+          "current-user",
+          JSON.stringify(data.user)
+        );
+        navigate("/home");
+      }
     }
   };
 
@@ -66,7 +77,7 @@ const Welcome = () => {
         </p>
         <div className=" sm:w-3/5 h-3/5 sm:h-full mx-2 items-center">
           <h1 className="uppercase text-center">new to app?</h1>
-          <form className="flex flex-col mx-20 mt-10 text-black">
+          <form className="flex flex-col mx-20 mt-10 text-black" method="post" autoComplete="off">
             <input
               className="my-2 bg-[#D6D6D7] p-2"
               type="text"

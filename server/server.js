@@ -4,11 +4,12 @@ const mongoose = require("mongoose");
 var cors = require('cors')
 var bodyParser = require('body-parser')
 const port = 8888;
-const MANGO_URL = "mongodb://localhost:27017/Url-short";
+const MANGO_URL = "mongodb://localhost:27017/Fit-trk";
 const Routes = require('./Routes');
 
 
 app.use(cors())
+app.use(express.json());
 
 
 // parse application/x-www-form-urlencoded
