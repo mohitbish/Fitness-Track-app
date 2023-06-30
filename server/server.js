@@ -5,6 +5,7 @@ var cors = require('cors')
 var bodyParser = require('body-parser')
 const port = 8888;
 const MANGO_URL = "mongodb://localhost:27017/Url-short";
+const Routes = require('./Routes');
 
 
 app.use(cors())
@@ -28,10 +29,10 @@ mongoose
     console.log(err.message);
   });
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+
+app.use("/route", Routes);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+

@@ -1,20 +1,47 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import {registerroute} from '../Routes/dbroute'
+
 
 const Welcome = () => {
-  const [username,setUsername] = useState('')
-  const [email,seteamil] = useState('')
-  const [password,setpassword] = useState('')
+  const [username, setUsername] = useState("");
+  const [email, seteamil] = useState("");
+  const [password, setpassword] = useState("");
 
-  const handleusernameChange = (event)=>{
-    setUsername(event.target.value)
-  }
-  const handleemailChange = (event)=>{
-    seteamil(event.target.value)
-  }
-  const handlepasswordChange = (event)=>{
-    setpassword(event.target.value)
-  }
+  const handleusernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+  const handleemailChange = (event) => {
+    seteamil(event.target.value);
+  };
+  const handlepasswordChange = (event) => {
+    setpassword(event.target.value);
+  };
+
+  const inputvalidation = () => {
+    if (username.length < 3) {
+      alert("Username should be greater than 3 characters.");
+      return false;
+    } else if (email === "") {
+      alert("Email is required.");
+      return false;
+    } else if (password.length < 8) {
+      alert("Password should be equal or greater than 8 characters.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleregistersubmit = async() => {
+    if (inputvalidation) {
+      const { data } = await axios.post(registerroute, {
+        username: username,
+        email: email,
+        password: password
+      });
+    }
+  };
 
   return (
     <div className="w-[100vw] h-[100vh] bg-[#202124]">
@@ -34,8 +61,8 @@ const Welcome = () => {
       </div>
       <div className=" w-full h-[90vh] flex flex-col sm:flex-row space justify-between px-5 sm:px-10 py-10 sm:py-15  text-white border-2 border-gray-500">
         <p className=" sm:w-2/5 h-2/5 sm:h-full  aling-centre">
-          Some welcome text
-          add passport js auth down in row for md and icons for sm
+          Some welcome text add passport js auth down in row for md and icons
+          for sm
         </p>
         <div className=" sm:w-3/5 h-3/5 sm:h-full mx-2 items-center">
           <h1 className="uppercase text-center">new to app?</h1>
@@ -64,7 +91,10 @@ const Welcome = () => {
               value={password}
               onChange={handlepasswordChange}
             />
-            <button className="text-white  uppercase border-2 hover:bg-[#323639] px-4 py-3 my-4 mx-auto flex items-center">
+            <button
+              className="text-white  uppercase border-2 hover:bg-[#323639] px-4 py-3 my-4 mx-auto flex items-center"
+              onClick={handleregistersubmit}
+            >
               sign-up
             </button>
           </form>
